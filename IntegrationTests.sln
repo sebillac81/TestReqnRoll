@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B7DFE7E8-3DFC-4E91-A78C-B34553897BE9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{175DE980-3515-4807-B943-564F50B29ADE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App", "src\App\App.csproj", "{9C36196C-5F68-4C21-B0B9-8FF0F48B28CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "tests\IntegrationTests\IntegrationTests.csproj", "{6026FA34-F157-42B5-A70E-78080DDB514F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestInfrastucture", "TestInfrastucture", "{B23F2C9A-65C2-4837-9D03-897EB68C1D39}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C36196C-5F68-4C21-B0B9-8FF0F48B28CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C36196C-5F68-4C21-B0B9-8FF0F48B28CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C36196C-5F68-4C21-B0B9-8FF0F48B28CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C36196C-5F68-4C21-B0B9-8FF0F48B28CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6026FA34-F157-42B5-A70E-78080DDB514F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6026FA34-F157-42B5-A70E-78080DDB514F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6026FA34-F157-42B5-A70E-78080DDB514F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6026FA34-F157-42B5-A70E-78080DDB514F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9C36196C-5F68-4C21-B0B9-8FF0F48B28CF} = {B7DFE7E8-3DFC-4E91-A78C-B34553897BE9}
+		{6026FA34-F157-42B5-A70E-78080DDB514F} = {175DE980-3515-4807-B943-564F50B29ADE}
+		{B23F2C9A-65C2-4837-9D03-897EB68C1D39} = {175DE980-3515-4807-B943-564F50B29ADE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {92C7B03F-AABF-4476-8C3A-28DF3B98ADEB}
+	EndGlobalSection
+EndGlobal
