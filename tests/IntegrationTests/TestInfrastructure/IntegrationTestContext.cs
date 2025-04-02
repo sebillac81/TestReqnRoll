@@ -1,20 +1,22 @@
 ﻿using DotPulsar.Abstractions;
 using DotPulsar;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DotNet.Testcontainers.Containers;
 using DotNet.Testcontainers.Builders;
+using Testcontainers.PostgreSql;
+using System.Data;
+using Dapper;
+using Org.BouncyCastle.Crypto.Operators;
 
 namespace IntegrationTests.TestInfrastructure
 {
     public static class IntegrationTestContext
     {
         private static IContainer _pulsarContainer;
+        private static PostgreSqlContainer _postgreSqlContainer;
+        private static IDbConnection _dbConnection;
         private static IPulsarClient _client;
         public static IContainer PulsarContainer {  get { return _pulsarContainer; } }
+        
         public static IPulsarClient Client
         {
             get
@@ -34,7 +36,8 @@ namespace IntegrationTests.TestInfrastructure
                 _client = value;
             }
         }
-        public static async Task<IContainer> BuildPulsarContainerAsync()
+        public static IDbConnection DbConnection { get { return _dbConnection; } }
+        public static async Task BuildPulsarContainerAsync()
         {
             if( _pulsarContainer == null)
             {
@@ -49,11 +52,26 @@ namespace IntegrationTests.TestInfrastructure
 
                 await _pulsarContainer.StartAsync();
             }
-
-            return _pulsarContainer;
         }
 
-        public static async Task DisposeResourcesAsync()
+        public static async Task BuildPostgreSqlContainerAsync()
+        {
+            if (_postgreSqlContainer == null)
+            {
+                _postgreSqlContainer = new PostgreSqlBuilder()
+                  .WithImage("postgres:latest")
+                  .WithDatabase("testdb")
+                  .WithUsername("postgres")
+                  .WithPassword("postgres")
+                  .WithCleanUp(true)
+                  .Build();
+
+                await _postgreSqlContainer.StartAsync();
+                _dbConnection = new Npgsql.NpgsqlConnection(_postgreSqlContainer.GetConnectionString());
+            }
+        }
+
+        public static async Task DisposePulsarResourcesAsync()
         {
             if (_client != null)
                 await _client.DisposeAsync();
@@ -62,7 +80,16 @@ namespace IntegrationTests.TestInfrastructure
             {
                 await _pulsarContainer.StopAsync();
             }
+
             Console.WriteLine("container stopped");
+        }
+
+        public static async Task DisposePostgreSqlResourcesAsync()
+        {
+            _dbConnection?.Dispose();
+
+            if (_postgreSqlContainer != null)
+                await _postgreSqlContainer.DisposeAsync();
         }
         public static string GetPulsarBrokerUrl() => "pulsar://localhost:6650";
     }

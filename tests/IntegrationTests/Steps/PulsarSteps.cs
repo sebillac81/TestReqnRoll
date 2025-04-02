@@ -1,13 +1,8 @@
 ﻿using DotPulsar.Abstractions;
 using DotPulsar.Extensions;
-using DotPulsar.Internal;
 using IntegrationTests.TestInfrastructure;
 using Reqnroll;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace IntegrationTests.Steps
 {
@@ -46,7 +41,7 @@ namespace IntegrationTests.Steps
         }
 
         [Then(@"The consumer receive a message ""([^""]*)""")]
-        public async Task ThenTheMessageReceivedMustBe(string expectedMessage)
+        public async Task ThenTheConsumerReceivedAMessage(string expectedMessage)
         {
             using (var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30)))
             {
@@ -60,6 +55,9 @@ namespace IntegrationTests.Steps
 
                     var message = await _consumer.Receive(cts.Token);
                     _messageReceived = Encoding.UTF8.GetString(message.Data);
+                     await _consumer.Acknowledge(message);
+
+
                     Assert.That(_messageReceived, Is.EqualTo(expectedMessage));
                 }
                 catch (OperationCanceledException)
@@ -79,7 +77,7 @@ namespace IntegrationTests.Steps
             if(_consumer != null)
                 await _consumer.DisposeAsync();
 
-            await IntegrationTestContext.DisposeResourcesAsync();
+            await IntegrationTestContext.DisposePulsarResourcesAsync();
         }
 
     }

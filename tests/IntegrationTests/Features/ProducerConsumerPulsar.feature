@@ -1,4 +1,4 @@
-Feature: Envio y recepcion de mensaje
+Feature: Sending and consuming message
 
 Scenario: Produce and consume a message
 Given The Pulsar client is created

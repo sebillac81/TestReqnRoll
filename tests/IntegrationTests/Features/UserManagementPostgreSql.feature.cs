@@ -20,18 +20,18 @@ namespace IntegrationTests.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Envio y recepcion de mensaje")]
+    [NUnit.Framework.DescriptionAttribute("User Management")]
     [NUnit.Framework.FixtureLifeCycleAttribute(NUnit.Framework.LifeCycle.InstancePerTestCase)]
-    public partial class EnvioYRecepcionDeMensajeFeature
+    public partial class UserManagementFeature
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Envio y recepcion de mensaje", null, global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "User Management", null, global::Reqnroll.ProgrammingLanguage.CSharp, featureTags);
         
-#line 1 "ProducerConsumer.feature"
+#line 1 "PostgreSql.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
@@ -83,12 +83,12 @@ namespace IntegrationTests.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Produce and consume a message")]
-        public async System.Threading.Tasks.Task ProduceAndConsumeAMessage()
+        [NUnit.Framework.DescriptionAttribute("Creating a new user")]
+        public async System.Threading.Tasks.Task CreatingANewUser()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Produce and consume a message", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Creating a new user", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 3
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -100,16 +100,16 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 await this.ScenarioStartAsync();
 #line 4
-await testRunner.GivenAsync("The Pulsar container is up", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+await testRunner.GivenAsync("I have a clean PostgreSql database", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 5
-await testRunner.GivenAsync("The Pulsar client is created", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+await testRunner.WhenAsync("I create a user with name \"Sebastian Villalba\" and email \"sv@example.com\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 6
-await testRunner.WhenAsync("The producer send a message \"Hello Pulsar!\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+await testRunner.ThenAsync("The user should exist in the database", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
 #line 7
-await testRunner.ThenAsync("The consumer receive a message \"Hello Pulsar!\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+await testRunner.AndAsync("The user should have the correct details", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
